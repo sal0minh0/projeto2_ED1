@@ -8,7 +8,6 @@ from Clinica import Paciente
 from Eventos import Evento
 from Restaurante import Restaurante
 
-# Tela Principal
 class Main:
     def __init__(self):
         # Clinica
@@ -21,7 +20,6 @@ class Main:
     def run(self):
         self.janela_principal.mainloop()
 
-# Executar a aplicação
 if __name__ == '__main__':
     app = Main()
     app.run()
