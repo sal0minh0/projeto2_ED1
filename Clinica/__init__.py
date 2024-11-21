@@ -1,1 +1,1 @@
-from .paciente import Paciente
+from .clinica import Paciente

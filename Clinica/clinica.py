@@ -11,14 +11,7 @@ class HistoricoPacientes:
         self._pilha_acoes = Pilha()
     
     def agendar_consulta(self, paciente, medico, data):
-        """
-        Agenda uma consulta e registra a ação para possível desfazer.
-        
-        Args:
-            paciente (str): Nome do paciente
-            medico (str): Nome do médico
-            data (str): Data da consulta
-        """
+        """Agenda uma consulta e registra a ação para possível desfazer."""
         consulta = {
             'acao': 'agendar',
             'paciente': paciente,
@@ -29,14 +22,7 @@ class HistoricoPacientes:
         print(f"Consulta agendada: {paciente} com {medico} em {data}")
     
     def atualizar_consulta(self, paciente, novo_medico=None, nova_data=None):
-        """
-        Atualiza uma consulta e registra a ação anterior para desfazer.
-        
-        Args:
-            paciente (str): Nome do paciente
-            novo_medico (str, opcional): Novo médico da consulta
-            nova_data (str, opcional): Nova data da consulta
-        """
+        """Atualiza uma consulta e registra a ação anterior para desfazer."""
         consulta_atual = {
             'acao': 'atualizar',
             'paciente': paciente,
@@ -45,8 +31,7 @@ class HistoricoPacientes:
             'novo_medico': novo_medico,
             'nova_data': nova_data
         }
-        
-        # Atualiza a consulta (simulação de um sistema de gerenciamento)
+        # Atualiza a consulta 
         if paciente not in self._consultas:
             raise ValueError(f"Não existe consulta para o paciente {paciente}")
         
@@ -59,10 +44,7 @@ class HistoricoPacientes:
         print(f"Consulta de {paciente} atualizada")
     
     def desfazer_ultima_acao(self):
-        """
-        Desfaz a última ação realizada no histórico de consultas.
-        Pode desfazer agendamentos e atualizações.
-        """
+        """Desfaz a última ação realizada no histórico de consultas."""
         if self._pilha_acoes.esta_vazia():
             print("Não há ações para desfazer.")
             return
@@ -87,9 +69,7 @@ class HistoricoPacientes:
         self._consultas = {}  # Armazena as consultas correntes
     
     def listar_historico(self):
-        """
-        Lista o histórico de ações realizadas.
-        """
+        """Lista o histórico de ações realizadas."""
         if self._pilha_acoes.esta_vazia():
             print("Não há histórico de ações.")
             return
@@ -131,10 +111,7 @@ historico.listar_historico()
 
 class GerenciadorEmergencia:
     def __init__(self):
-        """
-        Inicializa o gerenciador de emergência com filas de prioridade.
-        Emergência alta, média e baixa serão atendidas em ordem de chegada.
-        """
+        """Inicializa o gerenciador de emergência com filas de prioridade."""
         self._fila_alta_prioridade = Fila()
         self._fila_media_prioridade = Fila()
         self._fila_baixa_prioridade = Fila()
@@ -143,13 +120,7 @@ class GerenciadorEmergencia:
         self._historico_atendimentos = []
     
     def adicionar_paciente(self, paciente, prioridade):
-        """
-        Adiciona um paciente à fila de acordo com sua prioridade.
-        
-        Args:
-            paciente (dict): Informações do paciente
-            prioridade (str): Prioridade do atendimento ('alta', 'media', 'baixa')
-        """
+        """Adiciona um paciente à fila de acordo com sua prioridade."""
         paciente_info = {
             'nome': paciente.get('nome'),
             'idade': paciente.get('idade'),
@@ -170,12 +141,7 @@ class GerenciadorEmergencia:
             raise ValueError("Prioridade inválida. Use 'alta', 'media' ou 'baixa'.")
     
     def chamar_proximo_paciente(self):
-        """
-        Chama o próximo paciente para atendimento seguindo a ordem de prioridade.
-        
-        Returns:
-            dict: Informações do próximo paciente a ser atendido
-        """
+        """Chama o próximo paciente para atendimento seguindo a ordem de prioridade."""
         # Prioridade: alta > media > baixa
         if not self._fila_alta_prioridade.esta_vazia():
             paciente = self._fila_alta_prioridade.remover()
@@ -198,12 +164,7 @@ class GerenciadorEmergencia:
         return paciente
     
     def calcular_tempo_espera(self):
-        """
-        Calcula o tempo de espera estimado para cada fila de prioridade.
-        
-        Returns:
-            dict: Tempo estimado de espera para cada fila
-        """
+        """Calcula o tempo de espera estimado para cada fila de prioridade."""
         tempo_medio_atendimento = 20  # minutos
         
         return {
@@ -213,12 +174,7 @@ class GerenciadorEmergencia:
         }
     
     def gerar_relatorio_atendimentos(self):
-        """
-        Gera um relatório detalhado dos atendimentos realizados.
-        
-        Returns:
-            list: Lista de atendimentos realizados
-        """
+        """Gera um relatório detalhado dos atendimentos realizados."""
         if not self._historico_atendimentos:
             print("Não há atendimentos registrados.")
             return []
@@ -234,9 +190,7 @@ class GerenciadorEmergencia:
         return self._historico_atendimentos
     
     def status_atual_filas(self):
-        """
-        Mostra o status atual de todas as filas de prioridade.
-        """
+        """Mostra o status atual de todas as filas de prioridade."""
         print("\n--- Status Atual das Filas ---")
         print(f"Alta Prioridade: {len(self._fila_alta_prioridade.items)} pacientes")
         print(f"Média Prioridade: {len(self._fila_media_prioridade.items)} pacientes")
@@ -281,15 +235,7 @@ emergencia.gerar_relatorio_atendimentos()
 
 class CadastroDadosMedico:
     def __init__(self, nome, crm, especialidade, disponibilidade):
-        """
-        Representa os dados de um médico.
-        
-        Args:
-            nome (str): Nome completo do médico
-            crm (str): Número do CRM
-            especialidade (str): Especialidade médica
-            disponibilidade (list): Dias e horários disponíveis
-        """
+        """Representa os dados de um médico."""
         self.nome = nome
         self.crm = crm
         self.especialidade = especialidade
@@ -301,11 +247,8 @@ class CadastroDadosMedico:
 
 class CadastroMedicos:
     def __init__(self):
-        """
-        Inicializa o sistema de cadastro de médicos com árvores 
-        para diferentes formas de organização.
-        """
-        # Árvore por CRM (chave única)
+        """Inicializa o sistema de cadastro de médicos com árvores """
+        # Árvore por CRM
         self._arvore_crm = ArvoreBinaria()
         
         # Árvores por especialidade
@@ -315,15 +258,7 @@ class CadastroMedicos:
         self._medicos_por_crm = {}
     
     def cadastrar_medico(self, nome, crm, especialidade, disponibilidade):
-        """
-        Cadastra um novo médico no sistema.
-        
-        Args:
-            nome (str): Nome completo do médico
-            crm (str): Número do CRM
-            especialidade (str): Especialidade médica
-            disponibilidade (list): Dias e horários disponíveis
-        """
+        """Cadastra um novo médico no sistema."""
         # Cria objeto de dados do médico
         medico = CadastroDadosMedico(nome, crm, especialidade, disponibilidade)
         
@@ -342,29 +277,13 @@ class CadastroMedicos:
         print(f"Médico {nome} cadastrado com sucesso.")
     
     def buscar_medico_por_crm(self, crm):
-        """
-        Busca um médico pelo número do CRM.
-        
-        Args:
-            crm (str): Número do CRM
-        
-        Returns:
-            CadastroDadosMedico: Informações do médico ou None
-        """
+        """Busca um médico pelo número do CRM."""
         if self._arvore_crm.buscar(crm):
             return self._medicos_por_crm.get(crm)
         return None
     
     def listar_medicos_por_especialidade(self, especialidade):
-        """
-        Lista todos os médicos de uma determinada especialidade.
-        
-        Args:
-            especialidade (str): Especialidade médica
-        
-        Returns:
-            list: Lista de médicos da especialidade
-        """
+        """Lista todos os médicos de uma determinada especialidade."""
         if especialidade not in self._arvores_especialidade:
             print(f"Nenhum médico encontrado na especialidade {especialidade}")
             return []
@@ -380,17 +299,7 @@ class CadastroMedicos:
         return medicos_especialidade
     
     def buscar_medico_disponivel(self, especialidade, dia, hora):
-        """
-        Busca médicos disponíveis por especialidade, dia e hora.
-        
-        Args:
-            especialidade (str): Especialidade médica
-            dia (str): Dia da semana
-            hora (str): Horário
-        
-        Returns:
-            list: Lista de médicos disponíveis
-        """
+        """Busca médicos disponíveis por especialidade, dia e hora."""
         medicos_disponiveis = []
         
         # Obtém médicos da especialidade
@@ -406,12 +315,7 @@ class CadastroMedicos:
         return medicos_disponiveis
     
     def remover_medico(self, crm):
-        """
-        Remove um médico do sistema pelo CRM.
-        
-        Args:
-            crm (str): Número do CRM
-        """
+        """Remove um médico do sistema pelo CRM."""
         if crm not in self._medicos_por_crm:
             print(f"Médico com CRM {crm} não encontrado.")
             return
@@ -431,12 +335,7 @@ class CadastroMedicos:
         print(f"Médico {medico.nome} removido do sistema.")
     
     def gerar_relatorio_especialidades(self):
-        """
-        Gera um relatório com a quantidade de médicos por especialidade.
-        
-        Returns:
-            dict: Dicionário com número de médicos por especialidade
-        """
+        """Gera um relatório com a quantidade de médicos por especialidade."""
         relatorio = {}
         for especialidade, arvore in self._arvores_especialidade.items():
             # Obtém lista de CRMs da especialidade
