@@ -246,34 +246,30 @@ class ArvoreParticipantes:
             resultados.append(no_atual.valor)
             self.ordenar_recursivo(no_atual.direita, resultados)
 
+# Criando árvore de participantes
+eventos = ArvoreParticipantes()
 
-def main():
-    # Criando árvore de participantes
-    eventos = ArvoreParticipantes()
-    
-    # Inserindo participantes
-    p1 = eventos.inserir_participante("Maria Silva", "maria@email.com", "prioritário")
-    p2 = eventos.inserir_participante("João Santos", "joao@email.com")
-    p3 = eventos.inserir_participante("Ana Oliveira", "ana@email.com")
-    p4 = eventos.inserir_participante("Pedro Souza", "pedro@email.com", "estudante")
-    
-    # Buscando por número de inscrição
-    print("\nBusca por Número de Inscrição:")
-    print(eventos.buscar_por_numero_inscricao(p2.numero_inscricao))
-    
-    # Buscando por nome
-    print("\nBusca por Nome:")
-    resultado_busca = eventos.buscar_por_nome("silva")
-    print("Participantes com 'silva' no nome:")
-    for participante in resultado_busca:
-        print(participante)
-    
-    # Listando todos os participantes
-    print("\nTodos os Participantes:")
-    for participante in eventos.listar_participantes():
-        print(f"#{participante.numero_inscricao} - {participante.nome} ({participante.tipo_inscricao})")
+# Inserindo participantes
+p1 = eventos.inserir_participante("Maria Silva", "maria@email.com", "prioritário")
+p2 = eventos.inserir_participante("João Santos", "joao@email.com")
+p3 = eventos.inserir_participante("Ana Oliveira", "ana@email.com")
+p4 = eventos.inserir_participante("Pedro Souza", "pedro@email.com", "estudante")
+
+# Buscando por número de inscrição
+print("\nBusca por Número de Inscrição:")
+print(eventos.buscar_por_numero_inscricao(p2.numero_inscricao))
+
+# Buscando por nome
+print("\nBusca por Nome:")
+resultado_busca = eventos.buscar_por_nome("silva")
+print("Participantes com 'silva' no nome:")
+for participante in resultado_busca:
+    print(participante)
+
+# Listando todos os participantes
+print("\nTodos os Participantes:")
+for participante in eventos.listar_participantes():
+    print(f"#{participante.numero_inscricao} - {participante.nome} ({participante.tipo_inscricao})")
 
 
-if __name__ == "__main__":
-    main()
     
