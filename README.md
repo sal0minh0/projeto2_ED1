@@ -8,4 +8,4 @@
 
 ... em construção ...
 
-- falta inputs no main -
+- falta um menu de inputs no main -
