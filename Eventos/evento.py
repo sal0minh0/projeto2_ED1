@@ -3,7 +3,9 @@ import os
 
 # Adicionando o diretorio "Eventos" para verificação no caminho de busca de módulos no Python
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Estruturas import Pilha, Fila, ArvoreBinaria
+from Estruturas.pilha import Pilha
+from Estruturas.fila import Fila
+from Estruturas.arvore import ArvoreBinaria
 from Estruturas.arvore import No
 
 class HistoricoEventos:
@@ -141,20 +143,25 @@ print(evento.status_inscricoes())
 print("\nEstado Atual da Fila:")
 print(evento)
 
-
 class Participante:
-    def __init__(self, numero_inscricao, nome, email, tipo_inscricao, valor):
-        """Representa um participante com informações detalhadas."""
+    def __init__(self, numero_inscricao, nome, email, tipo_inscricao='regular'):
+        """Inicializa um participante com suas informações."""
         self.numero_inscricao = numero_inscricao
         self.nome = nome
         self.email = email
         self.tipo_inscricao = tipo_inscricao
-        super().__init__(valor)
     
-    def __repr__(self):
+    def __str__(self):
         """Representação em string do participante."""
-        return f"Participante(#{self.numero_inscricao}, {self.nome})"
+        return f"Participante {self.numero_inscricao}: {self.nome} ({self.email})"
 
+
+class No:
+    def __init__(self, valor):
+        """Inicializa um nó da árvore binária."""
+        self.valor = valor
+        self.esquerda = None
+        self.direita = None
 
 class ArvoreParticipantes:
     def __init__(self):
@@ -245,6 +252,24 @@ class ArvoreParticipantes:
             self.ordenar_recursivo(no_atual.esquerda, resultados)
             resultados.append(no_atual.valor)
             self.ordenar_recursivo(no_atual.direita, resultados)
+
+# Exemplo de uso
+arvore = ArvoreParticipantes()
+
+# Inserindo participantes
+p1 = arvore.inserir_participante("João Silva", "joao@email.com")
+p2 = arvore.inserir_participante("Maria Souza", "maria@email.com")
+p3 = arvore.inserir_participante("Pedro Santos", "pedro@email.com")
+
+# Buscando por número de inscrição
+print(arvore.buscar_por_numero_inscricao(2))  # Busca o participante com número de inscrição 2
+
+# Buscando por nome
+print(arvore.buscar_por_nome("Silva"))  # Retorna lista de participantes com "Silva" no nome
+
+# Listando todos os participantes
+for participante in arvore.listar_participantes():
+    print(participante)
 
 # Criando árvore de participantes
 eventos = ArvoreParticipantes()
