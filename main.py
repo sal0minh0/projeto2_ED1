@@ -4,7 +4,7 @@ import os
 # Adicionar diretorio Pai para verificação no caminho de busca de módulos no Python
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from Clinica import HistoricoPacientes, GerenciadorEmergencia, CadastroMedicos
+from Clinica.clinica import HistoricoPacientes, GerenciadorEmergencia, CadastroMedicos
 from Eventos import HistoricoEventos, FilaDeEventos, ArvoreParticipantes
 from Restaurante import Pedido, FilaPedidos, GerenciadorMenu
 

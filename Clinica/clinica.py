@@ -3,7 +3,9 @@ import os
 
 # Adicionando o diretorio "Clínica" para verificação no caminho de busca de módulos no Python
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Estruturas import Pilha, Fila, ArvoreBinaria
+from Estruturas.pilha import Pilha
+from Estruturas.fila import Fila
+from Estruturas.arvore import ArvoreBinaria
 
 class HistoricoPacientes:
     def __init__(self):
@@ -12,6 +14,12 @@ class HistoricoPacientes:
     
     def agendar_consulta(self, paciente, medico, data):
         """Agenda uma consulta e registra a ação para possível desfazer."""
+        # Adiciona a consulta ao dicionário de consultas
+        self._consultas[paciente] = {
+            'medico': medico,
+            'data': data
+        }
+        
         consulta = {
             'acao': 'agendar',
             'paciente': paciente,
