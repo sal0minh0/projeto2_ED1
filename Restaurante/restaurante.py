@@ -92,7 +92,6 @@ class ItemPedido:
         """Representação em string do item."""
         return f"{self.nome} (Tempo: {self.tempo_preparo} min)"
 
-
 class FilaPedidos:
     def __init__(self):
         """Inicializa a fila de pedidos."""
