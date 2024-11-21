@@ -3,7 +3,9 @@ import os
 
 # Adicionando o diretório "Restaurante" ao caminho de busca de módulos do Python
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Estruturas import Pilha, Fila, ArvoreBinaria
+from Estruturas.pilha import Pilha
+from Estruturas.fila import Fila
+from Estruturas.arvore import ArvoreBinaria
 
 class Pedido:
     def __init__(self):
@@ -178,43 +180,37 @@ while fila_pedidos.quantidade_pedidos() > 0:
 
 class ItemMenu:
     def __init__(self, nome, preco, categoria):
-        """
-        Representa um item do menu com informações de popularidade.
-        
-        Args:
-            nome (str): Nome do item
-            preco (float): Preço do item
-            categoria (str): Categoria do item
-        """
+        """ Representa um item do menu com informações de popularidade."""
         self.nome = nome
         self.preco = preco
         self.categoria = categoria
         self.vendas_total = 0
         self.total_pedidos = 0
-    
+
     def registrar_venda(self, quantidade):
-        """
-        Registra uma venda do item.
-        
-        Args:
-            quantidade (int): Número de vendas a serem registradas
-        """
+        """ Registra uma venda do item."""
         self.vendas_total += quantidade
         self.total_pedidos += 1
-    
-    def get_popularidade(self):
-        """
-        Calcula a popularidade do item baseado no número de vendas.
-        
-        Returns:
-            float: Índice de popularidade
-        """
+
+    def obter_popularidade(self):
+        """ Calcula a popularidade do item baseado no número de vendas."""
         return self.vendas_total / max(self.total_pedidos, 1)
-    
+
     def __repr__(self):
         """Representação em string do item."""
-        return f"{self.nome} (R${self.preco:.2f}) - Popularidade: {self.get_popularidade():.2f}"
+        return f"{self.nome} (R${self.preco:.2f}) - Popularidade: {self.obter_popularidade():.2f}"
 
+    def __lt__(self, other):
+        """Less than comparison based on popularity"""
+        return self.obter_popularidade() < other.obter_popularidade()
+
+    def __gt__(self, other):
+        """Greater than comparison based on popularity"""
+        return self.obter_popularidade() > other.obter_popularidade()
+
+    def __eq__(self, other):
+        """Equality comparison based on popularity"""
+        return self.obter_popularidade() == other.obter_popularidade()
 
 class GerenciadorMenu:
     def __init__(self):
@@ -252,12 +248,11 @@ class GerenciadorMenu:
         # Obtém todos os itens em ordem decrescente de popularidade
         todos_itens = sorted(
             self.menu.values(), 
-            key=lambda x: x.get_popularidade(), 
+            key=lambda x: x.obter_popularidade(), 
             reverse=True
         )
         
         return todos_itens[:limite]
-    
     def listar_por_categoria(self, categoria):
         """Lista itens de uma categoria específica."""
         return [
