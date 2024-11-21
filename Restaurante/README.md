@@ -1,0 +1,1 @@
+## Metodos usados nessa pasta que tem inputs
